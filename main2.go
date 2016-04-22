@@ -34,11 +34,11 @@ func BasicAuth(f ViewFunc, user, passwd []byte) ViewFunc {
             }
         }
 
-        // 认证失败，提示 401 Unauthorized
-        // Restricted 可以改成其他的值
+        // 认证失败，提示 401 Unauthorized // Restricted 可以改成其他的值
         w.Header().Set("WWW-Authenticate", `Basic realm="Restricted"`)
         // 401 状态码
         w.WriteHeader(http.StatusUnauthorized)
+        io.WriteString(w, "401 Unauthozied!\n")
     }
 }
 
@@ -46,6 +46,7 @@ func BasicAuth(f ViewFunc, user, passwd []byte) ViewFunc {
 func HelloServer(w http.ResponseWriter, req *http.Request) {
     io.WriteString(w, "hello, world!\n")
 }
+
 func main() {
     user := []byte("foo")
     passwd := []byte("bar")
