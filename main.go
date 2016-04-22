@@ -54,6 +54,7 @@ func AuthRequired()gin.HandlerFunc{
         }
         // 认证失败，提示 401 Unauthorized
         c.JSON(http.StatusUnauthorized, gin.H{"status": "unauthorized"})
+        c.Abort()
     }
 }
 func GetLocation(c *gin.Context) {
