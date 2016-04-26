@@ -11,6 +11,7 @@ import (
     "bytes"
     "github.com/hefju/HQGPS/tools/setting"
     "math"
+    "fmt"
 )
 
 var engine *xorm.Engine
@@ -27,27 +28,31 @@ func Init2() {
 
 type Gps struct {
     CarNum string
-    Lon, Lat float64
+    Lon, Lat string
     Gpstime string//time.Time
-    Speed int32
+    Speed string
 }
+
 
 func GetGps(vehicle string)*Gps{
     gps:=&Gps{}
-    sql := "exec GetGps '"+vehicle+"'"//"select * from userinfo"
+    sql := "exec GetGps "+vehicle//"select * from userinfo"
+    fmt.Println(sql)
     results, err := engine.Query(sql)
     if err != nil {
         log.Println(err)
     }
     if len(results)>0{
         one:=results[0]
-
         gps.CarNum=string(one["CarNum"])
-        gps.Lon=Float64frombytes(one["Lon"])
-        gps.Lat=Float64frombytes(one["Lat"])
-
+        gps.Lon=string(one["Lon"])
+        gps.Lat=string(one["Lat"])
         gps.Gpstime=string(one["Gpstime"])
-        gps.Speed=read_int32(one["Speed"])
+        gps.Speed=string(one["Speed"])
+//        gps.Lon=Float64frombytes(one["Lon"])
+//        gps.Lat=Float64frombytes(one["Lat"])
+//        gps.Gpstime=string(one["Gpstime"])
+//        gps.Speed=read_int32(one["Speed"])
     }
     return gps
 }

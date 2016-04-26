@@ -9,25 +9,32 @@ import (
     "encoding/base64"
     "bytes"
     "time"
-    "log"
+   // log "github.com/YoungPioneers/blog4go"
+    "github.com/YoungPioneers/blog4go"
     "github.com/hefju/HQGPS/model"
-)
 
+    "log"
+)
 
 func main() {
     setting.LoadProfile()// loadConfig()//读取配置文件
     model.Init2()
 
+    gin.SetMode(gin.ReleaseMode)
 	router := gin.New()
-    router.GET("/UpdateUser",ReloadSetting)
+    router.GET("/UpdateConfig",ReloadSetting)
+
+    router.GET("/GetLocationTest",GetLocation)
 
     authorized := router.Group("/")
     authorized.Use(AuthRequired())
     {
         authorized.GET("/GetLocation", GetLocation)
-    }
-
+}
+  blog4go.Info("lisent at 8089")
+   // log.INFO("lisent at 8089")
 	log.Fatal(router.Run(":8089"))
+  //  log.Critical(router.Run(":8089"))
 }
 
 func ReloadSetting(c *gin.Context){
