@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+//	"fmt"
     "github.com/hefju/HQGPS/tools/setting"
 	"github.com/gin-gonic/gin"
     "net/http"
@@ -10,11 +10,13 @@ import (
     "bytes"
     "time"
     "log"
+    "github.com/hefju/HQGPS/model"
 )
 
 
 func main() {
     setting.LoadProfile()// loadConfig()//读取配置文件
+    model.Init2()
 
 	router := gin.New()
     router.GET("/UpdateUser",ReloadSetting)
@@ -60,12 +62,14 @@ func AuthRequired()gin.HandlerFunc{
 func GetLocation(c *gin.Context) {
 
 	carNum := c.Query("vehicle")
-	fmt.Println(carNum)
-	c.JSON(200, gin.H{
-		"carNum":  carNum,
-		"lon":     "113.1524",
-		"lat":     "23.0822",
-		"gpstime": "2016.4.21 19:32",
-		"speed":   "16",
-	})
+    gps:=  model.GetGps(carNum)
+    c.JSON(200, gps)
+//	fmt.Println(carNum)
+//	c.JSON(200, gin.H{
+//		"carNum":  carNum,
+//		"lon":     "113.1524",
+//		"lat":     "23.0822",
+//		"gpstime": "2016.4.21 19:32",
+//		"speed":   "16",
+//	})
 }

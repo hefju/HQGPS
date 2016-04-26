@@ -1,20 +1,22 @@
 package model
 import (
-    "time"
+//    "time"
     "github.com/go-xorm/core"
     "github.com/go-xorm/xorm"
     _ "github.com/lunny/godbc"
 
     "log"
     "encoding/binary"
-    "cmd/go/testdata/shadow/root1/src/math"
+
     "bytes"
+    "github.com/hefju/HQGPS/tools/setting"
+    "math"
 )
 
 var engine *xorm.Engine
-func init() {
+func Init2() {
     var err error
-    engine, err = xorm.NewEngine("sqlite3", "./test.db")
+    engine, err = xorm.NewEngine(setting.AppConfig.Connecttype, setting.AppConfig.Connectstring)
     //engine.ShowSQL = true
     engine.SetMapper(core.SameMapper{})
     if err != nil {
@@ -31,6 +33,7 @@ type Gps struct {
 }
 
 func GetGps(vehicle string)*Gps{
+    gps:=&Gps{}
     sql := "exec GetGps '"+vehicle+"'"//"select * from userinfo"
     results, err := engine.Query(sql)
     if err != nil {
@@ -38,7 +41,7 @@ func GetGps(vehicle string)*Gps{
     }
     if len(results)>0{
         one:=results[0]
-        gps:=&Gps{}
+
         gps.CarNum=string(one["CarNum"])
         gps.Lon=Float64frombytes(one["Lon"])
         gps.Lat=Float64frombytes(one["Lat"])
@@ -46,6 +49,7 @@ func GetGps(vehicle string)*Gps{
         gps.Gpstime=string(one["Gpstime"])
         gps.Speed=read_int32(one["Speed"])
     }
+    return gps
 }
 func Float64frombytes(bytes []byte) float64 {
     bits := binary.LittleEndian.Uint64(bytes)
