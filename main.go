@@ -10,8 +10,8 @@ import (
     "bytes"
     "time"
    // log "github.com/YoungPioneers/blog4go"
-    "github.com/YoungPioneers/blog4go"
     "github.com/hefju/HQGPS/model"
+    "github.com/hefju/HQGPS/App"
 
     "log"
 )
@@ -31,7 +31,8 @@ func main() {
     {
         authorized.GET("/GetLocation", GetLocation)
 }
-  blog4go.Info("lisent at 8089")
+    App.Info("lisent at 8089")
+//  blog4go.Info("lisent at 8089")
    // log.INFO("lisent at 8089")
 	log.Fatal(router.Run(":8089"))
   //  log.Critical(router.Run(":8089"))
