@@ -10,6 +10,7 @@ type Config struct {
     Pwd string           //
     Connecttype string   //连接类型
     Connectstring string //连接字符串
+    LogPath string
 }
 func LoadProfile(){//从配置文件读取配置
     file:="conf.json"
@@ -24,6 +25,6 @@ func LoadProfile(){//从配置文件读取配置
         log.Fatalln(err)
     }
     AppConfig=c
-    log.Println(AppConfig)
+    //log.Println(AppConfig)
     log.Println("load setting from conf.json.")
 }

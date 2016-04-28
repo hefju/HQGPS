@@ -11,7 +11,6 @@ import (
     "bytes"
     "github.com/hefju/HQGPS/tools/setting"
     "math"
-    "fmt"
 )
 
 var engine *xorm.Engine
@@ -37,7 +36,7 @@ type Gps struct {
 func GetGps(vehicle string)*Gps{
     gps:=&Gps{}
     sql := "exec GetGps "+vehicle//"select * from userinfo"
-    fmt.Println(sql)
+//    fmt.Println(sql)
     results, err := engine.Query(sql)
     if err != nil {
         log.Println(err)

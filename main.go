@@ -13,11 +13,11 @@ import (
     "github.com/hefju/HQGPS/model"
     "github.com/hefju/HQGPS/App"
 
-    "log"
+	"github.com/donnie4w/go-logger/logger"
 )
 
 func main() {
-    setting.LoadProfile()// loadConfig()//读取配置文件
+	App.AppInit()
     model.Init2()
 
     gin.SetMode(gin.ReleaseMode)
@@ -31,11 +31,9 @@ func main() {
     {
         authorized.GET("/GetLocation", GetLocation)
 }
-    App.Info("lisent at 8089")
-//  blog4go.Info("lisent at 8089")
-   // log.INFO("lisent at 8089")
-	log.Fatal(router.Run(":8089"))
-  //  log.Critical(router.Run(":8089"))
+  //  App.Debug("lisent at 8089")
+	logger.Debug("lisent at 8089")
+	logger.Fatal(router.Run(":8089"))
 }
 
 func ReloadSetting(c *gin.Context){
@@ -70,6 +68,7 @@ func AuthRequired()gin.HandlerFunc{
 func GetLocation(c *gin.Context) {
 
 	carNum := c.Query("vehicle")
+	logger.Debug("request vehicle:"+carNum)
     gps:=  model.GetGps(carNum)
     c.JSON(200, gps)
 //	fmt.Println(carNum)
