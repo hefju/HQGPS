@@ -14,6 +14,8 @@ import (
     "github.com/hefju/HQGPS/App"
 
 	"github.com/donnie4w/go-logger/logger"
+    "fmt"
+   // "log"
 )
 
 func main() {
@@ -22,6 +24,7 @@ func main() {
 
     gin.SetMode(gin.ReleaseMode)
 	router := gin.New()
+    router.GET("/Chinese",Chinese)
     router.GET("/UpdateConfig",ReloadSetting)
 
     router.GET("/GetLocationTest",GetLocation)
@@ -68,7 +71,8 @@ func AuthRequired()gin.HandlerFunc{
 func GetLocation(c *gin.Context) {
 
 	carNum := c.Query("vehicle")
-	logger.Debug("request vehicle:"+carNum)
+	//logger.Debug("request vehicle:"+carNum)
+    fmt.Println(carNum)
     gps:=  model.GetGps(carNum)
     c.JSON(200, gps)
 //	fmt.Println(carNum)
@@ -79,4 +83,11 @@ func GetLocation(c *gin.Context) {
 //		"gpstime": "2016.4.21 19:32",
 //		"speed":   "16",
 //	})
+}
+//http://www.ruanyifeng.com/blog/2010/02/url_encoding.html
+func Chinese(c *gin.Context){
+    ch:=c.Query("ch")
+    //log.Println(ch)
+    fmt.Println(ch+"end")
+    c.JSON(200,ch)
 }
