@@ -1,8 +1,8 @@
 {
-  "user":"foo",
-  "pwd":"bar2",
+  "user":"hsgps",
+  "pwd":"hsgps",
   "filename":"config.json",
   "connecttype":"odbc",
-  "connectstring":"driver={SQL Server};Server=192.168.1.200; Database=JXC; uid=sa; pwd=hellocb;",
+  "connectstring":"driver={SQL Server};Server=192.168.1.200; Database=JXC; uid=sa; pwd=123;",
   "LogPath":"D:/Programs/HSGPS/log"
 }
