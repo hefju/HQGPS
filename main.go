@@ -1,7 +1,6 @@
 package main
 
 import (
-//	"fmt"
     "github.com/hefju/HQGPS/tools/setting"
 	"github.com/gin-gonic/gin"
     "net/http"
@@ -9,13 +8,11 @@ import (
     "encoding/base64"
     "bytes"
     "time"
-   // log "github.com/YoungPioneers/blog4go"
     "github.com/hefju/HQGPS/model"
     "github.com/hefju/HQGPS/App"
 
 	"github.com/donnie4w/go-logger/logger"
     "fmt"
-   // "log"
 )
 
 func main() {
@@ -69,9 +66,7 @@ func AuthRequired()gin.HandlerFunc{
     }
 }
 func GetLocation(c *gin.Context) {
-
 	carNum := c.Query("vehicle")
-	//logger.Debug("request vehicle:"+carNum)
     fmt.Println(carNum)
     gps:=  model.GetGps(carNum)
     c.JSON(200, gps)
@@ -87,7 +82,6 @@ func GetLocation(c *gin.Context) {
 //http://www.ruanyifeng.com/blog/2010/02/url_encoding.html
 func Chinese(c *gin.Context){
     ch:=c.Query("ch")
-    //log.Println(ch)
     fmt.Println(ch+"end")
     c.JSON(200,ch)
 }
