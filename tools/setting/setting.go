@@ -13,7 +13,7 @@ type Config struct {
     LogPath string
 }
 func LoadProfile(){//从配置文件读取配置
-    file:="conf.json"
+    file:= "D:/Programs/HSGPS/HSGPS.Conf.json"
     r, err := os.Open(file)
     if err != nil {
         log.Fatalln(err)
