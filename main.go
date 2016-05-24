@@ -29,7 +29,7 @@ func main() {
     authorized := router.Group("/")
     authorized.Use(AuthRequired())
     {
-        authorized.GET("/GetLocation", GetLocation)
+        authorized.POST("/GetLocation", GetLocation)
 }
   //  App.Debug("lisent at 8089")
 	logger.Debug("lisent at 8089")
