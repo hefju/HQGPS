@@ -30,6 +30,7 @@ func main() {
     authorized.Use(AuthRequired())
     {
         authorized.POST("/GetLocation", GetLocation)
+        authorized.POST("/GetLocationCN", GetLocationCN)
 }
   //  App.Debug("lisent at 8089")
 	logger.Debug("lisent at 8089")
@@ -70,14 +71,12 @@ func GetLocation(c *gin.Context) {
     fmt.Println(carNum)
     gps:=  model.GetGps(carNum)
     c.JSON(200, gps)
-//	fmt.Println(carNum)
-//	c.JSON(200, gin.H{
-//		"carNum":  carNum,
-//		"lon":     "113.1524",
-//		"lat":     "23.0822",
-//		"gpstime": "2016.4.21 19:32",
-//		"speed":   "16",
-//	})
+}
+func GetLocationCN(c *gin.Context) {
+    carNum := c.Query("vehicle")
+    fmt.Println(carNum)
+    gps:=  model.GetGpsCN(carNum)
+    c.JSON(200, gps)
 }
 //http://www.ruanyifeng.com/blog/2010/02/url_encoding.html
 func Chinese(c *gin.Context){
