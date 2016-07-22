@@ -3,6 +3,6 @@
   "pwd":"hsgps",
   "filename":"config.json",
   "connecttype":"odbc",
-  "connectstring":"driver={SQL Server};Server=192.168.1.200; Database=JXC; uid=sa; pwd=123;",
+  "connectstring":"driver={SQL Server};Server=192.168.100.200; Database=JXC; uid=sa; pwd=hellocb;",
   "LogPath":"D:/Programs/HSGPS/log"
 }

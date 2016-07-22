@@ -66,8 +66,9 @@ func AuthRequired()gin.HandlerFunc{
     }
 }
 func GetLocation(c *gin.Context) {
-	carNum := c.Query("vehicle")
-    fmt.Println(carNum)
+	//carNum := c.Query("vehicle")
+	carNum :=c.PostForm("vehicle")  //c.Param("vehicle")
+    fmt.Println("GetLocation Param [vehicle] ",carNum)
     gps:=  model.GetGps(carNum)
     c.JSON(200, gps)
 //	fmt.Println(carNum)
